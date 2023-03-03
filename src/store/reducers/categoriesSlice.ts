@@ -2,7 +2,7 @@ import {createAsyncThunk, createSelector, createSlice} from '@reduxjs/toolkit';
 import {fetchData, PATHS} from 'http/index';
 import {RootState} from "../store";
 
-export const fetchCategories = createAsyncThunk('products/fetchCategories', async () => {
+export const fetchCategories = createAsyncThunk('categories/fetchCategories', async () => {
     return await fetchData(PATHS.CATEGORIES);
 });
 
