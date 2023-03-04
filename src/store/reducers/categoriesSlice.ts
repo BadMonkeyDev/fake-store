@@ -2,9 +2,13 @@ import {createAsyncThunk, createSelector, createSlice} from '@reduxjs/toolkit';
 import {fetchData, PATHS} from 'http/index';
 import {RootState} from "../store";
 
-export const fetchCategories = createAsyncThunk('categories/fetchCategories', async () => {
-    return await fetchData(PATHS.CATEGORIES);
-});
+export const fetchCategories = createAsyncThunk(
+    'categories/fetchCategories',
+    async () => {
+        const response = await fetchData(PATHS.CATEGORIES)
+        return  response
+    }
+)
 
 export type CategoriesDataType = string[] | null
 
@@ -37,13 +41,12 @@ export const categoriesSlice = createSlice({
             .addCase(fetchCategories.rejected, (state, action) => {
                 state.loading = false;
                 state.error = action.error.message ?? 'Failed to fetch categories';
-            });
+            })
     },
 });
+
 
 export const selectCategories = createSelector(
     (state: RootState) => state.categories.data,
     (categories: CategoriesDataType) => categories
 );
-
-export default categoriesSlice.reducer;

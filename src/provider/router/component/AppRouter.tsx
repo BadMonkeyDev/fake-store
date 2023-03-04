@@ -1,17 +1,31 @@
-import React, {lazy, Suspense} from 'react';
+import React, {Suspense} from 'react';
 import {Route, Routes} from "react-router-dom";
+import styled from "styled-components";
+import {routes} from "../routes";
 
-const MainPage = lazy(() => import('pages/MainPage'))
-const PersonalPage = lazy(() => import('pages/PersonalPage'))
+
+
+const StyledContent = styled.div`
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 96px 24px 24px 24px;
+    width: 100%;
+    min-height: calc(100vh - 72px);
+    background-color: aliceblue;
+`
 
 const AppRouter = () => {
     return (
-        <Suspense fallback={<div>Loading...</div>}>
-            <Routes>
-                <Route path={'/'} element={<MainPage/>}/>
-                <Route path={'/personal'} element={<PersonalPage/>}/>
-            </Routes>
-        </Suspense>
+        <StyledContent>
+            <Suspense fallback={<div>Loading...</div>}>
+                <Routes>
+                    {Object.values(routes).map(route =>
+                        <Route key={route.id} path={route.path} element={route.pageComponent}/>
+                    )}
+                </Routes>
+            </Suspense>
+        </StyledContent>
     );
 };
 
