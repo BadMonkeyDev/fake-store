@@ -13,17 +13,11 @@ import {selectTab} from "../store/reducers/tabsReducer";
 const Header = () => {
     const user = useSelector(selectUser)
     const tab = useSelector(selectTab)
-    // const [value, setValue] = useState(1);
-
-    // const handleChange = (event: React.ChangeEvent<{}>, newValue: number) => {
-    //     setValue(newValue);
-    // };
 
     return (
-        <AppBar position="static" sx={{ position: "fixed", top: 0, padding: "0 32px" }}>
+        <AppBar position="static" sx={{ position: "fixed", top: 0, padding: "0 32px", zIndex: 1}}>
             <Tabs
                 value={tab}
-                // onChange={handleChange}
                 aria-label="Navigation"
                 indicatorColor="primary"
                 textColor="primary"

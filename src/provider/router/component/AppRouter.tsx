@@ -11,7 +11,7 @@ const StyledContent = styled.div`
     align-items: center;
     padding: 96px 24px 24px 24px;
     width: 100%;
-    min-height: calc(100vh - 72px);
+    flex: 1;
     background-color: aliceblue;
 `
 
