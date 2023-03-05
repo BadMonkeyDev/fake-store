@@ -1,11 +1,26 @@
-import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
+import {createSlice, createAsyncThunk, createSelector} from '@reduxjs/toolkit';
 import { fetchData, PATHS } from 'http/index';
-import {Product} from "../../hooks/useProducts";
+import {RootState} from "../store";
 
 export const fetchProducts = createAsyncThunk('products/fetchProducts', async () => {
     const response = await fetchData(PATHS.PRODUCTS);
     return response;
 });
+
+export interface IRating {
+    "rate": number,
+    "count":number
+}
+
+export interface Product {
+    id: number;
+    title: string;
+    price: number;
+    description: string;
+    category: string;
+    image: string;
+    "rating": IRating
+}
 
 export type ProductsDataType = Product[] | null;
 
@@ -42,4 +57,7 @@ export const productsSlice = createSlice({
     },
 });
 
-export default productsSlice.reducer;
+export const selectProducts = createSelector(
+    (state: RootState) => state.products.data,
+    (products: ProductsDataType) => products
+);
