@@ -6,6 +6,6 @@ export function useToggleAuthOnMount() {
     const dispatch = useDispatch();
 
     useEffect(() => {
-        dispatch(toggleAuth());
+        dispatch(toggleAuth(false));
     }, [dispatch]);
 }

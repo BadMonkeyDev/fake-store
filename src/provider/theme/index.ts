@@ -1,4 +1,4 @@
-import {createTheme, PaletteColor, PaletteColorOptions, PaletteMode, ThemeOptions} from "@mui/material";
+import {createTheme, PaletteColor, PaletteColorOptions} from "@mui/material";
 import createPalette from "@mui/material/styles/createPalette";
 
 
@@ -81,6 +81,11 @@ export const theme = createTheme({
                  }
                 }
             ]
+        },
+        MuiFormControl: {
+            styleOverrides: {
+
+            }
         }
     }
 });

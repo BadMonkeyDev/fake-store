@@ -22,8 +22,8 @@ export const userSlice = createSlice({
     name: 'user',
     initialState,
     reducers: {
-        toggleAuth: state => {
-            state.data.isAuth = !state.data.isAuth
+        toggleAuth: (state, action) => {
+            state.data.isAuth = action.payload
         }
     },
 });

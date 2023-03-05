@@ -1,15 +1,19 @@
 import React from 'react';
-import {useToggleAuthOnMount} from "../hooks/useToggleAuthOnMount";
 import {useSetTabOnMount} from "../hooks/useSetTabOnMount";
 import {routes} from "../provider/router/routes";
+import {Container} from "@mui/material";
+import AuthForm from "widgets/AuthForm";
+import {useToggleAuthOnMount} from "../hooks/useToggleAuthOnMount";
+
 
 const AuthenticationPage = () => {
-    useToggleAuthOnMount()
     useSetTabOnMount(routes.auth.id)
+
+    useToggleAuthOnMount()
     return (
-        <div>
-            
-        </div>
+            <Container maxWidth={"xs"}>
+                <AuthForm />
+            </Container>
     );
 };
 
