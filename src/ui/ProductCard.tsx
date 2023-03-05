@@ -29,8 +29,9 @@ const StyledMedia = styled.div`
 const StyledContent = styled.div`  
   display: flex;
   flex-direction: column;
-  gap: 8px;
+  justify-content: space-between;
   margin-top: 16px;
+  height: 100%;
 `
 
 const StyleImage = styled.img`
@@ -47,10 +48,12 @@ const StyledPrice = styled.div`
   justify-content: space-between;
 `
 const StyledActions = styled.div`
-
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
 `
 
-interface ProductCardProps {
+export interface ProductCardProps {
     product: Product
 }
 
@@ -59,7 +62,7 @@ const ProductCard: FC<ProductCardProps> = ({product}) => {
     const theme = useTheme()
 
     return (
-        <Card sx={{padding: "16px", height: "100%"}}>
+        <Card sx={{padding: "16px", height: "100%", display: "flex", flexDirection: "column"}}>
             <StyledMedia>
                 <StyleImage src={image} alt={title}/>
             </StyledMedia>

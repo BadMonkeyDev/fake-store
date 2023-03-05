@@ -1,9 +1,10 @@
-import React, {Suspense} from 'react';
-import {Route, Routes} from "react-router-dom";
+import React, {Suspense, useState} from 'react';
+import {Route, Routes, Navigate} from "react-router-dom";
 import styled from "styled-components";
-import {routes} from "../routes";
-
-
+import {authRoutes, publicRoutes, routes} from "../routes";
+import {HOME_ROUTE} from "../../../utils/consts";
+import {useSelector} from "react-redux";
+import {selectUser} from "../../../store/reducers/userReducer";
 
 const StyledContent = styled.div`
     display: flex;
@@ -16,13 +17,18 @@ const StyledContent = styled.div`
 `
 
 const AppRouter = () => {
+    const user = useSelector(selectUser)
     return (
         <StyledContent>
             <Suspense fallback={<div>Loading...</div>}>
                 <Routes>
-                    {Object.values(routes).map(route =>
-                        <Route key={route.id} path={route.path} element={route.pageComponent}/>
+                    {user.isAuth && authRoutes.map(({path, Component}) =>
+                        <Route key={path} path={path} element={<Component />} />
                     )}
+                    {publicRoutes.map(({path, Component}) =>
+                        <Route key={path} path={path} element={<Component />} />
+                    )}
+                    <Route path='*' element={<Navigate to={HOME_ROUTE} replace={true} />} />
                 </Routes>
             </Suspense>
         </StyledContent>
