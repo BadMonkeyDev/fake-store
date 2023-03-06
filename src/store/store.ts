@@ -4,14 +4,12 @@ import {categoriesSlice} from "store/reducers/categoriesSlice";
 import {productsSlice} from "store/reducers/productsSlice";
 import {userSlice} from "./reducers/userReducer";
 import {useDispatch} from "react-redux";
-import {tabsSlice} from "./reducers/tabsReducer";
 
 const store = configureStore({
     reducer: {
         categories: categoriesSlice.reducer,
         products: productsSlice.reducer,
         user: userSlice.reducer,
-        tabs: tabsSlice.reducer,
     }
 });
 // Define the root state type

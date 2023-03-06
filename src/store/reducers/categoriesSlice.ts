@@ -2,15 +2,9 @@ import {createAsyncThunk, createSelector, createSlice} from '@reduxjs/toolkit';
 import {fetchData, PATHS} from 'http/index';
 import {RootState} from "../store";
 
-export const fetchCategories = createAsyncThunk(
-    'categories/fetchCategories',
-    async () => {
-        const response = await fetchData(PATHS.CATEGORIES)
-        return  response
-    }
-)
+export type CategoriesType = "electronics" | "jewelery" | "men's clothing" | "women's clothing"
 
-export type CategoriesDataType = string[] | null
+export type CategoriesDataType = CategoriesType[] | null
 
 export interface CategoriesState {
     data: CategoriesDataType;
@@ -19,10 +13,19 @@ export interface CategoriesState {
 }
 
 const initialState: CategoriesState = {
-    data: [],
+    data: null,
     loading: false,
     error: null,
 };
+
+
+export const fetchCategories = createAsyncThunk(
+    'categories/fetchCategories',
+    async () => {
+        const response = await fetchData(PATHS.CATEGORIES)
+        return  response
+    }
+)
 
 export const categoriesSlice = createSlice({
     name: 'categories',

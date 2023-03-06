@@ -62,7 +62,7 @@ const ProductCard: FC<ProductCardProps> = ({product}) => {
     const theme = useTheme()
 
     return (
-        <Card sx={{padding: "16px", height: "100%", display: "flex", flexDirection: "column"}}>
+        <Card sx={{padding: "16px", height: "100%", display: "flex", flexDirection: "column", "&:hover": {cursor: "pointer"} }}>
             <StyledMedia>
                 <StyleImage src={image} alt={title}/>
             </StyledMedia>
@@ -76,7 +76,7 @@ const ProductCard: FC<ProductCardProps> = ({product}) => {
                         <Typography color={theme.palette.error.main} sx={{alignItems: "center", display: "flex", textAlign: "center"}}>
                             {price} <AttachMoneyIcon />
                         </Typography>
-                        <IconButton sx={{color: theme.palette.success.main}} >
+                        <IconButton sx={{color: theme.palette.success.main}} onClick={e => e.stopPropagation()}>
                             <ShoppingCartOutlinedIcon />
                         </IconButton>
                     </StyledPrice>
