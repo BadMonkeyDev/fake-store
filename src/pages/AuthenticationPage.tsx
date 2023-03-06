@@ -1,15 +1,16 @@
 import React from 'react';
-import {useSetTabOnMount} from "../hooks/useSetTabOnMount";
-import {routes} from "../provider/router/routes";
 import {Container} from "@mui/material";
 import AuthForm from "widgets/AuthForm";
-import {useToggleAuthOnMount} from "../hooks/useToggleAuthOnMount";
+import {useDispatch, useSelector} from "react-redux";
+import {selectUser, toggleAuth} from "../store/reducers/userReducer";
 
 
 const AuthenticationPage = () => {
-    useSetTabOnMount(routes.auth.id)
-
-    useToggleAuthOnMount()
+    const dispatch = useDispatch();
+    const user = useSelector(selectUser)
+    if (user.isAuth) {
+        dispatch(toggleAuth(false));
+    }
     return (
             <Container maxWidth={"xs"}>
                 <AuthForm />

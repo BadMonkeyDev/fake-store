@@ -1,5 +1,5 @@
-import React from 'react';
-import {Link} from "react-router-dom";
+import React, {useEffect, useState} from 'react';
+import {Link, useLocation} from "react-router-dom";
 import ShoppingCartOutlinedIcon from '@mui/icons-material/ShoppingCartOutlined';
 import LogoutIcon from '@mui/icons-material/Logout';
 import {AppBar, Tab, Tabs} from "@mui/material";
@@ -7,13 +7,21 @@ import {routes} from "../provider/router/routes";
 import LogoWithText from "../ui/LogoWithText";
 import {useSelector} from "react-redux";
 import {selectUser} from "../store/reducers/userReducer";
-import {selectTab} from "../store/reducers/tabsReducer";
-import {CART_ROUTE, HOME_ROUTE, LOGIN_ROUTE, PERSONAL_ROUTE, PRODUCTS_ROUTE} from "../utils/consts";
+import {CART_ROUTE, HOME_ROUTE, LOGIN_ROUTE, PERSONAL_ROUTE, PRODUCTS_ROUTE, REGISTRATION_ROUTE} from "../utils/consts";
 
 
 const Header = () => {
+    const [tab, setTab] = useState<string>(HOME_ROUTE)
+    const location = useLocation()
     const user = useSelector(selectUser)
-    const tab = useSelector(selectTab)
+
+    useEffect(() => {
+        if (location.pathname === LOGIN_ROUTE || location.pathname === REGISTRATION_ROUTE){
+            setTab(LOGIN_ROUTE)
+        } else {
+            setTab(location.pathname)
+        }
+    }, [location.pathname])
 
     return (
         <AppBar position="static" sx={{ position: "fixed", top: 0, padding: "0 32px", zIndex: 1}}>
@@ -24,17 +32,17 @@ const Header = () => {
                 textColor="primary"
                 sx={{display: "flex"}}
             >
-                <Tab label={<LogoWithText />} component={Link} to={HOME_ROUTE} value={routes.home.id} />
-                <Tab label={routes.products.label} component={Link} to={PRODUCTS_ROUTE} value={routes.products.id} />
+                <Tab label={<LogoWithText />} component={Link} to={HOME_ROUTE} value={HOME_ROUTE} />
+                <Tab label={routes.products.label} component={Link} to={PRODUCTS_ROUTE} value={PRODUCTS_ROUTE} />
 
                 {user.isAuth ?
-                        <Tab label={<LogoutIcon />} component={Link} to={LOGIN_ROUTE} sx={{order: 2}} value={routes.auth.id}/>
+                        <Tab label={<LogoutIcon />} component={Link} to={LOGIN_ROUTE} sx={{order: 2}} value={LOGIN_ROUTE}/>
                         :
-                        <Tab label={routes.auth.label} component={Link} to={LOGIN_ROUTE} value={routes.auth.id} />
+                        <Tab label={routes.auth.label} component={Link} to={LOGIN_ROUTE} value={LOGIN_ROUTE} />
                 }
-                <Tab label={<ShoppingCartOutlinedIcon />} component={Link} to={CART_ROUTE} sx={{marginLeft: "auto", order: 1}} value={routes.cart.id} />
+                <Tab label={<ShoppingCartOutlinedIcon />} component={Link} to={CART_ROUTE} sx={{marginLeft: "auto", order: 1}} value={CART_ROUTE} />
                 {user.isAuth &&
-                    <Tab label={routes.personal.label} component={Link} to={PERSONAL_ROUTE} value={routes.personal.id} />
+                    <Tab label={routes.personal.label} component={Link} to={PERSONAL_ROUTE} value={PERSONAL_ROUTE} />
                 }
             </Tabs>
         </AppBar>

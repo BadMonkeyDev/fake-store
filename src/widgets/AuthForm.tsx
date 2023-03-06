@@ -42,6 +42,10 @@ const AuthForm = () => {
         }
     }
 
+    const toggleAuthMode = (isLogin: boolean) => {
+        navigate(isLogin ? REGISTRATION_ROUTE : LOGIN_ROUTE)
+    }
+
     return (
         <StyledForm onSubmit={handleSubmit}>
             <TestInput id={'email'} label={'Email'} type={'email'} ref={emailRef}/>
@@ -56,10 +60,13 @@ const AuthForm = () => {
                 {isLogin ? `SIGN IN` : `SIGN UP`}
             </Button>
             <Box sx={{cursor: "pointer", display: "flex", justifyContent: "flex-end", userSelect: "none"}}>
-                {isLogin
-                    ? <Link href={REGISTRATION_ROUTE}>Don't have an account? Sign Up</Link>
-                    : <Link href={LOGIN_ROUTE}>Already have an account? Sign In</Link>
-                }
+                <Link
+                    onClick={() => toggleAuthMode(isLogin)}>
+                    {isLogin
+                        ? "Don't have an account? Sign Up"
+                        : "Already have an account? Sign In"}
+                </Link>
+
             </Box>
 
 
