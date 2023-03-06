@@ -1,12 +1,12 @@
 import React, {FC} from 'react';
-import {ProductsDataType} from "store/reducers/productsSlice";
+import {Product} from "store/reducers/productsSlice";
 import ProductCard from "../ui/ProductCard";
 import Grid from '@mui/material/Grid';
 import {useNavigate} from "react-router-dom";
 import {PRODUCT_ROUTE} from "../utils/consts";
 
 interface ProductListProps {
-    products: ProductsDataType
+    products: Product[] | undefined
 }
 
 const ProductList: FC<ProductListProps> = ({products}) => {
