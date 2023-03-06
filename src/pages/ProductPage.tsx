@@ -56,7 +56,7 @@ const ProductPage = () => {
     const theme = useTheme()
 
     const productId = location.pathname.slice(PRODUCT_ROUTE.length + 1)
-    const product = products?.length && products.find(product => product.id === Number(productId))
+    const product = products && products.length && products.find(product => product.id === Number(productId))
 
     if (product === undefined) {
         return (
@@ -66,7 +66,7 @@ const ProductPage = () => {
 
         const handleAddToCart = (e: MouseEvent) => {
             e.stopPropagation()
-            if (user.isAuth) {
+            if (user.isAuth && product) {
                 console.log(`product ${product.id} added to cart`)
             } else {
                 setOpen(true)
