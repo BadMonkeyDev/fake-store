@@ -3,7 +3,7 @@ import {Link, useLocation} from "react-router-dom";
 import ShoppingCartOutlinedIcon from '@mui/icons-material/ShoppingCartOutlined';
 import LogoutIcon from '@mui/icons-material/Logout';
 import {AppBar, Tab, Tabs} from "@mui/material";
-import {routes} from "../provider/router/routes";
+import {authRoutes, publicRoutes, routes} from "../provider/router/routes";
 import LogoWithText from "../ui/LogoWithText";
 import {useSelector} from "react-redux";
 import {selectUser} from "../store/reducers/userReducer";
@@ -16,10 +16,15 @@ const Header = () => {
     const user = useSelector(selectUser)
 
     useEffect(() => {
-        if (location.pathname === LOGIN_ROUTE || location.pathname === REGISTRATION_ROUTE){
-            setTab(LOGIN_ROUTE)
+        let allowedTabs = publicRoutes.map(publicRoute => publicRoute.path)
+        if (user.isAuth){
+            allowedTabs = [...allowedTabs, ...authRoutes.map(authRoute => authRoute.path)]
+        }
+        const tab = '/' + location.pathname.split('/')[1] || '/';
+        if (allowedTabs.includes(tab)){
+            (location.pathname === LOGIN_ROUTE || location.pathname === REGISTRATION_ROUTE) ? setTab(LOGIN_ROUTE) : setTab(tab)
         } else {
-            setTab(location.pathname)
+            setTab(HOME_ROUTE)
         }
     }, [location.pathname])
 
@@ -36,7 +41,7 @@ const Header = () => {
                 <Tab label={routes.products.label} component={Link} to={PRODUCTS_ROUTE} value={PRODUCTS_ROUTE} />
 
                 {user.isAuth ?
-                        <Tab label={<LogoutIcon />} component={Link} to={LOGIN_ROUTE} sx={{order: 2}} value={LOGIN_ROUTE}/>
+                        <Tab label={<LogoutIcon />} component={Link} to={LOGIN_ROUTE} sx={{order: 2}} value={LOGIN_ROUTE} state={{ from: 'authorized'}} />
                         :
                         <Tab label={routes.auth.label} component={Link} to={LOGIN_ROUTE} value={LOGIN_ROUTE} />
                 }
