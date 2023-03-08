@@ -4,11 +4,10 @@ import {Product, selectProducts} from "store/reducers/productsSlice";
 import ProductList from "widgets/ProductList";
 import {Typography} from "@mui/material";
 import DropDown from "../ui/DropDown";
-import {useLocation} from "react-router-dom";
+import {Link, useLocation} from "react-router-dom";
 import {CATEGORY_ROUTE, PRODUCTS_ROUTE} from "../utils/consts";
 import sortObjectsArray, {SortType} from "../utils/sortObjectsArray";
 import {CategoriesType} from "../store/reducers/categoriesSlice";
-import Link from "@mui/material/Link";
 
 export interface ISort {
     key: keyof Product;
@@ -59,7 +58,7 @@ const ProductListPage = () => {
 
     return (
             <>
-                {category && <Link href={PRODUCTS_ROUTE} sx={{alignSelf: "flex-start", marginBottom: '24px'}}>&lt; Return to product list</Link>}
+                {category && <Link to={PRODUCTS_ROUTE} style={{alignSelf: "flex-start", marginBottom: '24px'}}>&lt; Return to product list</Link>}
                 <Typography variant="h4" component="h2" sx={{alignSelf: "flex-start", marginBottom: '24px'}}>
                     Products
                 </Typography>

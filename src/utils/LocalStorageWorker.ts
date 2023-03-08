@@ -1,7 +1,8 @@
 import {CategoriesDataType} from "../store/reducers/categoriesSlice";
 import {ProductsDataType} from "../store/reducers/productsSlice";
+import {CartDataType} from "../store/reducers/cartSlice";
 
-type DataType = CategoriesDataType | ProductsDataType;
+type DataType = CategoriesDataType | ProductsDataType | CartDataType;
 
 export const LocalStorageWorker = {
     setItem(key: string, value: DataType): void {

@@ -41,7 +41,7 @@ const Header = () => {
                 <Tab label={routes.products.label} component={Link} to={PRODUCTS_ROUTE} value={PRODUCTS_ROUTE} />
 
                 {user.isAuth ?
-                        <Tab label={<LogoutIcon />} component={Link} to={LOGIN_ROUTE} sx={{order: 2}} value={LOGIN_ROUTE} state={{ from: 'authorized'}} />
+                        <Tab label={<LogoutIcon />} component={Link} to={LOGIN_ROUTE} sx={{order: 2}} value={LOGIN_ROUTE} state={{ action: 'logout'}} />
                         :
                         <Tab label={routes.auth.label} component={Link} to={LOGIN_ROUTE} value={LOGIN_ROUTE} />
                 }

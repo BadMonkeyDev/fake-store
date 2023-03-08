@@ -4,12 +4,14 @@ import {categoriesSlice} from "store/reducers/categoriesSlice";
 import {productsSlice} from "store/reducers/productsSlice";
 import {userSlice} from "./reducers/userReducer";
 import {useDispatch} from "react-redux";
+import {cartSlice} from "./reducers/cartSlice";
 
 const store = configureStore({
     reducer: {
         categories: categoriesSlice.reducer,
         products: productsSlice.reducer,
         user: userSlice.reducer,
+        cart: cartSlice.reducer,
     }
 });
 // Define the root state type
@@ -21,6 +23,7 @@ store.subscribe(() => {
 
     LocalStorageWorker.setItem("categories", state.categories.data);
     LocalStorageWorker.setItem("products", state.products.data);
+    LocalStorageWorker.setItem("cart", state.cart.data);
 
 });
 

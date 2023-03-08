@@ -1,13 +1,12 @@
 import avatar from 'assets/badmonkey.svg'
 import styled from "styled-components";
-import IconButton from "@mui/material/IconButton";
-import Link from '@mui/material/Link';
 import GitHub from "@mui/icons-material/GitHub";
 import LinkedIn from "@mui/icons-material/LinkedIn";
 import Telegram from "@mui/icons-material/Telegram";
 import {useTheme} from "@mui/material";
 import {HTMLAttributes} from "react";
 import AppIconButton from "ui/AppIconButton";
+import {Link} from "react-router-dom";
 
 interface StyledFooterProps extends HTMLAttributes<HTMLElement> {
     bgColor?: string;
@@ -45,19 +44,19 @@ const Footer = () => {
             </div>
             <div className="follow" style={{display: "flex", alignItems: "center"}}>
                 You can see examples of my code on
-                <Link href={'https://github.com/BadMonkeyDev/'} target={'_blank'}>
+                <Link to={'https://github.com/BadMonkeyDev/'} target={'_blank'}>
                     <AppIconButton variant="dark" >
                         <GitHub/>
                     </AppIconButton>
                 </Link>
                 and contact me via
-                <Link href={'https://www.linkedin.com/in/bmonkey/'} target={'_blank'}>
+                <Link to={'https://www.linkedin.com/in/bmonkey/'} target={'_blank'}>
                     <AppIconButton variant="dark" >
                         <LinkedIn/>
                     </AppIconButton>
                 </Link>
                 or
-                <Link href={'https://t.me/Badmonkeytg'} target={'_blank'}>
+                <Link to={'https://t.me/Badmonkeytg'} target={'_blank'}>
                     <AppIconButton variant="dark" >
                         <Telegram/>
                     </AppIconButton>

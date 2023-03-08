@@ -1,5 +1,5 @@
 import React from 'react';
-import Banner from "widgets/Banner";
+import Banner from "ui/Banner";
 import styled from "styled-components";
 import {useSelector} from "react-redux";
 import {selectCategories} from "store/reducers/categoriesSlice";

@@ -7,16 +7,9 @@ import Rating from "../widgets/Rating";
 import ShoppingCartOutlinedIcon from "@mui/icons-material/ShoppingCartOutlined";
 import IconButton from "@mui/material/IconButton";
 
-// id: number;
-// title: string;
-// price: number;
-// description: string;
-// category: string;
-// image: string;
-// "rating": Rating
-
 const StyledMedia = styled.div`
   position: relative;
+  width: 100%;
 
   &:before {
     display: block;
